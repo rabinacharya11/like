@@ -14,8 +14,6 @@ class LikeButton extends StatefulWidget {
     this.size = 30.0,
     this.likeBuilder,
     this.countBuilder,
-    double? bubblesSize,
-    double? circleSize,
     this.likeCount,
     this.isLiked = false,
     this.mainAxisAlignment = MainAxisAlignment.center,
@@ -30,16 +28,11 @@ class LikeButton extends StatefulWidget {
       dotThirdColor: Color(0xFFFF5722),
       dotLastColor: Color(0xFFF44336),
     ),
-    this.circleColor =
-        const CircleColor(start: Color(0xFFFF5722), end: Color(0xFFFFC107)),
-    this.onTap,
     this.countPostion = CountPostion.right,
     this.padding,
     this.countDecoration,
     this.postFrameCallback,
-  })  : bubblesSize = bubblesSize ?? size * 2.0,
-        circleSize = circleSize ?? size * 0.8,
-        super(key: key);
+  }) : super(key: key);
 
   /// size of like widget
   final double size;
@@ -47,20 +40,8 @@ class LikeButton extends StatefulWidget {
   /// animation duration to change isLiked state
   final Duration animationDuration;
 
-  /// total size of bubbles
-  final double bubblesSize;
-
   /// colors of bubbles
   final BubblesColor bubblesColor;
-
-  /// size of circle
-  final double circleSize;
-
-  /// colors of circle
-  final CircleColor circleColor;
-
-  /// tap call back of like button
-  final LikeButtonTapCallback? onTap;
 
   /// whether it is liked
   /// it's initial value
@@ -214,32 +195,6 @@ class LikeButtonState extends State<LikeButton> with TickerProviderStateMixin {
           return Stack(
             clipBehavior: Clip.none,
             children: <Widget>[
-              Positioned(
-                top: (widget.size - widget.bubblesSize) / 2.0,
-                left: (widget.size - widget.bubblesSize) / 2.0,
-                child: CustomPaint(
-                  size: Size(widget.bubblesSize, widget.bubblesSize),
-                  painter: BubblesPainter(
-                    currentProgress: _bubblesAnimation.value,
-                    color1: widget.bubblesColor.dotPrimaryColor,
-                    color2: widget.bubblesColor.dotSecondaryColor,
-                    color3: widget.bubblesColor.dotThirdColorReal,
-                    color4: widget.bubblesColor.dotLastColorReal,
-                  ),
-                ),
-              ),
-              Positioned(
-                top: (widget.size - widget.circleSize) / 2.0,
-                left: (widget.size - widget.circleSize) / 2.0,
-                child: CustomPaint(
-                  size: Size(widget.circleSize, widget.circleSize),
-                  painter: CirclePainter(
-                    innerCircleRadiusProgress: _innerCircleAnimation.value,
-                    outerCircleRadiusProgress: _outerCircleAnimation.value,
-                    circleColor: widget.circleColor,
-                  ),
-                ),
-              ),
               Container(
                 width: widget.size,
                 height: widget.size,
@@ -285,11 +240,7 @@ class LikeButtonState extends State<LikeButton> with TickerProviderStateMixin {
         child: result,
       );
     }
-
-    return GestureDetector(
-      onTap: onTap,
-      child: result,
-    );
+    return Container();
   }
 
   Widget _getLikeCountWidget() {
@@ -411,19 +362,6 @@ class LikeButtonState extends State<LikeButton> with TickerProviderStateMixin {
   Widget _createLikeCountWidget(int? likeCount, bool isLiked, String text) {
     return widget.countBuilder?.call(likeCount, isLiked, text) ??
         Text(text, style: const TextStyle(color: Colors.grey));
-  }
-
-  void onTap() {
-    if (_controller!.isAnimating || _likeCountController!.isAnimating) {
-      return;
-    }
-    if (widget.onTap != null) {
-      widget.onTap!(_isLiked ?? true).then((bool? isLiked) {
-        _handleIsLikeChanged(isLiked);
-      });
-    } else {
-      _handleIsLikeChanged(!(_isLiked ?? true));
-    }
   }
 
   void _handleIsLikeChanged(bool? isLiked) {

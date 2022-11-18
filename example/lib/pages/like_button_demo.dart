@@ -61,16 +61,9 @@ class _LikeButtonDemoState extends State<LikeButtonDemo> {
                 ? LikeCountAnimationType.part
                 : LikeCountAnimationType.none,
             likeCountPadding: const EdgeInsets.only(left: 15.0),
-            onTap: onLikeButtonTapped,
           ),
           LikeButton(
             size: buttonSize,
-            circleColor: const CircleColor(
-                start: Color(0xff00ddff), end: Color(0xff0099cc)),
-            bubblesColor: const BubblesColor(
-              dotPrimaryColor: Color(0xff33b5e5),
-              dotSecondaryColor: Color(0xff0099cc),
-            ),
             likeBuilder: (bool isLiked) {
               return Icon(
                 Icons.home,
@@ -99,12 +92,6 @@ class _LikeButtonDemoState extends State<LikeButtonDemo> {
           ),
           LikeButton(
             size: buttonSize,
-            circleColor: const CircleColor(
-                start: Color(0xff669900), end: Color(0xff669900)),
-            bubblesColor: const BubblesColor(
-              dotPrimaryColor: Color(0xff669900),
-              dotSecondaryColor: Color(0xff99cc00),
-            ),
             likeBuilder: (bool isLiked) {
               return Icon(
                 Icons.adb,
@@ -134,10 +121,6 @@ class _LikeButtonDemoState extends State<LikeButtonDemo> {
           LikeButton(
             size: buttonSize,
             isLiked: null,
-            circleColor: CircleColor(
-              start: Colors.redAccent[100]!,
-              end: Colors.redAccent[400]!,
-            ),
             bubblesColor: BubblesColor(
               dotPrimaryColor: Colors.red[300]!,
               dotSecondaryColor: Colors.red[200]!,
@@ -160,12 +143,6 @@ class _LikeButtonDemoState extends State<LikeButtonDemo> {
           ),
           LikeButton(
             size: buttonSize,
-            circleColor: CircleColor(
-                start: Colors.pinkAccent[200]!, end: Colors.pinkAccent[400]!),
-            bubblesColor: BubblesColor(
-              dotPrimaryColor: Colors.lightBlue[300]!,
-              dotSecondaryColor: Colors.lightBlue[200]!,
-            ),
             likeBuilder: (bool isLiked) {
               return Icon(
                 Icons.insert_emoticon,
@@ -177,10 +154,6 @@ class _LikeButtonDemoState extends State<LikeButtonDemo> {
           LikeButton(
             size: buttonSize,
             isLiked: null,
-            circleColor: CircleColor(
-              start: Colors.grey[200]!,
-              end: Colors.grey[400]!,
-            ),
             bubblesColor: BubblesColor(
               dotPrimaryColor: Colors.grey[600]!,
               dotSecondaryColor: Colors.grey[200]!,
@@ -205,10 +178,6 @@ class _LikeButtonDemoState extends State<LikeButtonDemo> {
           LikeButton(
             size: buttonSize,
             isLiked: null,
-            circleColor: CircleColor(
-              start: Colors.indigoAccent[200]!,
-              end: Colors.indigoAccent[400]!,
-            ),
             bubblesColor: BubblesColor(
               dotPrimaryColor: Colors.indigoAccent[700]!,
               dotSecondaryColor: Colors.indigoAccent[200]!,
@@ -249,10 +218,6 @@ class _LikeButtonDemoState extends State<LikeButtonDemo> {
           LikeButton(
             size: buttonSize,
             isLiked: null,
-            circleColor: CircleColor(
-              start: Colors.orange[200]!,
-              end: Colors.orange[400]!,
-            ),
             bubblesColor: BubblesColor(
               dotPrimaryColor: Colors.orange[600]!,
               dotSecondaryColor: Colors.orange[200]!,
@@ -294,9 +259,7 @@ class _LikeButtonDemoState extends State<LikeButtonDemo> {
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.favorite),
-        onPressed: () {
-          _globalKey.currentState!.onTap();
-        },
+        onPressed: () {},
       ),
     );
   }
